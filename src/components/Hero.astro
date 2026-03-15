@@ -1,0 +1,64 @@
+---
+---
+
+<section class="hero" id="hero">
+  <div class="container">
+    <p class="overline">Backend Dev & AI Integration</p>
+    <h1>
+      I build systems<br />
+      <span class="accent">that actually scale.</span>
+    </h1>
+    <p class="body-text">
+      7 years of production backend work — APIs, databases, distributed systems.<br class="br-desktop" />
+      In early 2025, I left my job to build on my own terms.<br class="br-desktop" />
+      Now helping teams integrate AI into their workflows — without the hype.<br class="br-desktop" />
+      Based in Ho Chi Minh City.
+    </p>
+    <div class="cta-row">
+      <a href="#work" class="btn btn-primary">See my work →</a>
+      <a href="#contact" class="btn btn-ghost">Get in touch</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    padding-block: clamp(5rem, 10vw, 8rem);
+  }
+
+  .overline {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 1.2rem;
+  }
+
+  h1 {
+    margin-bottom: 1.5rem;
+  }
+
+  .body-text {
+    color: var(--color-muted);
+    font-size: clamp(1rem, 1.8vw, 1.15rem);
+    max-width: 58ch;
+    margin-bottom: 2.5rem;
+    line-height: 1.8;
+  }
+
+  .cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .br-desktop { display: none; }
+
+  @media (min-width: 640px) {
+    .br-desktop { display: block; }
+  }
+</style>

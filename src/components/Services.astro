@@ -1,0 +1,108 @@
+---
+interface Service {
+  title: string;
+  description: string;
+  tags: string[];
+  price: string;
+}
+
+const services: Service[] = [
+  {
+    title: 'AI Integration & Automation',
+    description:
+      'Connect your tools. Automate the repetitive parts. Build pipelines that run while you sleep — Claude API, OpenAI, n8n, custom webhook flows.',
+    tags: ['Claude API', 'OpenAI', 'n8n', 'Node.js'],
+    price: 'Upwork — $20/hr+',
+  },
+  {
+    title: 'Fast, Focused Websites',
+    description:
+      'Content-first sites built on Astro + Cloudflare Pages. Sub-second loads, zero runtime overhead, easy to maintain. This portfolio is built on the same stack.',
+    tags: ['Astro', 'Cloudflare Pages', 'TypeScript'],
+    price: 'From 5M VND / project',
+  },
+  {
+    title: 'Backend Architecture & APIs',
+    description:
+      "API design, database optimization, AWS infrastructure. I've handled systems at 15M+ record scale. I know where things break before they do.",
+    tags: ['Node.js', 'AWS', 'MongoDB', 'Redis', 'PostgreSQL'],
+    price: 'Upwork — $20/hr+',
+  },
+];
+---
+
+<section id="services">
+  <div class="container">
+    <p class="section-label">What I do</p>
+    <h2>Services</h2>
+    <div class="grid">
+      {
+        services.map((s) => (
+          <div class="card">
+            <h3>{s.title}</h3>
+            <p>{s.description}</p>
+            <div class="tags">
+              {s.tags.map((t) => (
+                <span class="tag">{t}</span>
+              ))}
+            </div>
+            <p class="price">{s.price}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 0.5rem;
+  }
+
+  h2 { margin-bottom: 2.5rem; }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+    gap: 1.25rem;
+  }
+
+  .card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .card h3 { color: var(--color-text); }
+
+  .card p {
+    color: var(--color-muted);
+    font-size: 0.95rem;
+    max-width: none;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: auto;
+  }
+
+  .price {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--color-accent);
+    border-top: 1px solid var(--color-border);
+    padding-top: 1rem;
+    margin-top: 0.25rem;
+  }
+</style>

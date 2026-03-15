@@ -1,0 +1,114 @@
+---
+const skills = {
+  Core: ['Node.js', 'AWS', 'MongoDB', 'Redis', 'PostgreSQL', 'SQL'],
+  AI:   ['Claude API', 'OpenAI API', 'n8n'],
+  Web:  ['Astro', 'Cloudflare Pages', 'TypeScript'],
+  Tools: ['Git', 'Linux', 'Docker'],
+};
+---
+
+<section id="about">
+  <div class="container">
+    <p class="section-label">Background</p>
+    <h2>About</h2>
+    <div class="layout">
+      <div class="bio">
+        <p>
+          I'm Hải — backend developer based in Ho Chi Minh City. Spent 7 years
+          building production systems at C2C TechHub, from data pipelines
+          processing 15M+ records to infrastructure that stopped waking
+          engineers up at 3am.
+        </p>
+        <p>
+          In early 2025, I left to build independently. That was a choice.
+          Currently: AI integration work for clients, a strategy game in Godot,
+          and rebuilding a reading community I co-founded 9 years ago after it
+          nearly fell apart. Always building something.
+        </p>
+        <p>
+          I work best on problems with real constraints: performance targets,
+          reliability requirements, actual deadlines. If you have a system that
+          needs to be faster, smarter, or more automated — that's where I fit.
+        </p>
+      </div>
+      <div class="skills">
+        {
+          Object.entries(skills).map(([category, items]) => (
+            <div class="skill-group">
+              <p class="skill-category">{category}</p>
+              <div class="skill-items">
+                {items.map((item) => (
+                  <span class="tag">{item}</span>
+                ))}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 0.5rem;
+  }
+
+  h2 { margin-bottom: 2.5rem; }
+
+  .layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  @media (min-width: 768px) {
+    .layout {
+      grid-template-columns: 1.4fr 1fr;
+      align-items: start;
+    }
+  }
+
+  .bio {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .bio p {
+    color: var(--color-muted);
+    line-height: 1.8;
+  }
+
+  .skills {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+  }
+
+  .skill-group { display: flex; flex-direction: column; gap: 0.5rem; }
+
+  .skill-category {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+    max-width: none;
+  }
+
+  .skill-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+</style>
