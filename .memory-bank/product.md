@@ -1,73 +1,42 @@
 # Product Context
 
-## 🎯 Problem Statement
-**The Problem**:
-[What specific problem or pain point does this project address?]
+## Problem Statement
 
-**Current State**:
-[How do people solve this problem today, if at all?]
+**The Problem**: Independent freelancers need credibility signals before clients trust them. Without a portfolio, Upwork profiles look thin; without a live site, website service pitches feel hollow.
 
-**Desired State**:
-[What will be different after this project succeeds?]
+**Current State**: No public portfolio existed. Upwork profile not yet created. Both gaps block Phase 0 income.
 
-## 👥 Users & Personas
-### Primary User: [User Type]
-- **Profile**: [Who are they? Role, context]
-- **Goals**: [What do they want to achieve?]
-- **Pain Points**: [What frustrates them today?]
-- **Success Metrics**: [How do they measure success?]
+**Desired State**: Portfolio live + Upwork profile linked → credibility loop closes → first client inquiry possible.
 
-### Secondary User: [If applicable]
-- [Same structure]
+## Two Jobs (Dual Purpose)
 
-## 💎 Value Proposition
-**For** [target user]
-**Who** [problem statement]
-**This is a** [product category]
-**That** [key benefit]
-**Unlike** [current alternatives]
-**Our solution** [unique differentiator]
+This site does two jobs simultaneously:
 
-## 🎨 User Experience Principles
-- [Principle 1: e.g., "Simple by default, powerful when needed"]
-- [Principle 2: e.g., "Mobile-first design"]
-- [Principle 3: e.g., "Minimal learning curve"]
+### Job 1 — Upwork Credibility
+- **Audience**: English-speaking Upwork clients evaluating AI Integration / Automation freelancers
+- **Evaluation criteria**: Positioning clarity, past work relevance, contact accessibility
+- **Success**: Client clicks "Contact" or reaches out via Upwork
 
-## 📊 Key Metrics & KPIs
-- **[Metric Name]**: [Target value] — [Why it matters]
-- **[Metric Name]**: [Target value] — [Why it matters]
+### Job 2 — Website Service Demo
+- **Audience**: Local VN businesses evaluating website services
+- **Evaluation criteria**: The site itself — speed, design, mobile, professionalism
+- **Success**: Client says "I want something like this"
+- **The pitch**: "This site is built with the same stack I'd build yours on"
 
-## 🚧 Constraints & Requirements
-### Technical Constraints
-- [e.g., "Must work offline"]
-- [e.g., "Maximum 2s load time"]
+## Known Issues
 
-### Business Constraints
-- [e.g., "Budget: $X"]
-- [e.g., "Launch by Q2 2026"]
+| Issue | Location | Status |
+|-------|----------|--------|
+| Upwork URL is placeholder | `src/components/Contact.astro` | Blocked — Upwork profile not created yet |
 
-### Regulatory/Compliance
-- [e.g., "GDPR compliant"]
-- [e.g., "Accessibility AA standard"]
+## Roadmap
 
-## 🔄 User Journeys
-### Journey: [Primary Use Case]
-1. **Entry Point**: [How do users discover/start?]
-2. **Key Steps**: [What do they do?]
-3. **Success State**: [What does success look like?]
-4. **Edge Cases**: [What can go wrong?]
+1. **Now**: Replace Upwork URL placeholder once profile is created
+2. **Phase 0 Week 2+**: Blog/devlog section (Astro content collections)
+3. **Later**: Content pipeline — `digital-identity/derived/public-bio.md` → `src/content/`
 
-## 🗺️ Roadmap & Future Vision
-### Near Term (Next 3 months)
-- [Planned feature/improvement]
+## Constraints
 
-### Medium Term (3-6 months)
-- [Future capability]
-
-### Long Term (Vision)
-- [Aspirational goal]
-
-## ❓ Open Questions
-- [Unresolved product questions]
-- [Areas needing user research]
-- [Decisions pending]
+- **Static only** — no server runtime, no database (by design)
+- **Public repo** — required for Cloudflare Pages free tier auto-deploy
+- **No secrets** — nothing sensitive can live in this repo

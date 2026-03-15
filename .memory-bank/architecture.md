@@ -1,82 +1,65 @@
 # Architecture
 
-## 🏛️ System Overview
-[2-3 sentence high-level description of the system architecture]
+## System Overview
 
-**Architecture Style**: [e.g., Monolith / Microservices / Layered / Event-Driven / etc.]
+Single-page static site. Zero JS shipped to browser. All content hardcoded in Astro components — no CMS, no database, no API calls. Deployed to Cloudflare Pages CDN.
 
-## 📁 Project Structure
+**Architecture Style**: Static Site (pure SSG, no Astro Islands used)
+
+## Project Structure
+
 ```
-project-root/
-├── src/               — [Purpose]
-│   ├── components/    — [Purpose]
-│   ├── services/      — [Purpose]
-│   └── utils/         — [Purpose]
-├── tests/             — [Purpose]
-├── docs/              — [Purpose]
-└── config/            — [Purpose]
+portfolio/
+├── src/
+│   ├── components/        — Section components (Hero, Services, Work, About, Contact, Nav, Footer)
+│   ├── layouts/           — BaseLayout.astro (wraps all pages)
+│   ├── pages/             — index.astro (single page)
+│   └── styles/            — global.css (design tokens, reset, typography)
+├── public/                — Static assets
+├── dist/                  — Build output (gitignored)
+├── wrangler.jsonc         — Cloudflare Pages config
+└── astro.config.mjs       — Astro config (output: static, CF adapter)
 ```
 
-## 🧩 Key Components
-### [Component 1 Name]
-- **Location**: `path/to/component`
-- **Purpose**: [What it does]
-- **Dependencies**: [What it depends on]
-- **Consumers**: [What uses it]
+## Component Map
 
-### [Component 2 Name]
-- [Same structure as above]
-
-## 🔄 Data Flow
 ```
-[User/Client]
+index.astro
+  └── BaseLayout
+        ├── Nav
+        ├── Hero
+        ├── Services
+        ├── Work
+        ├── About
+        ├── Contact
+        └── Footer
+```
+
+## Data Flow
+
+```
+pnpm build
     ↓
-[Entry Point: e.g., API Gateway]
+Astro compiler (SSG)
     ↓
-[Processing Layer: e.g., Controllers/Services]
+dist/ (HTML + CSS + assets)
     ↓
-[Data Layer: e.g., Database/Storage]
+git push master
+    ↓
+Cloudflare Pages CDN
+    ↓
+Browser (zero JS)
 ```
 
-**Key Flows**:
-1. **[Flow Name]**: [Description of how data moves]
-2. **[Flow Name]**: [Another important flow]
+## Content Strategy
 
-## 🎨 Design Patterns & Principles
-- **[Pattern Name]**: [Where and why it's used]
-  - Example: `Singleton` for database connection
-- **[Pattern Name]**: [Another pattern]
-  - Example: `Factory` for creating service instances
+- **Current**: All content hardcoded in components (intentional — simple, fast)
+- **Future**: Astro content collections for blog/devlog (deferred to Phase 0 Week 2+)
+- **Content pipeline**: `digital-identity/derived/public-bio.md` → `src/content/` (deferred)
 
-## 🔌 External Integrations
-- **[Service Name]**: [Purpose, how integrated]
-  - Location: `path/to/integration`
-  - Auth: [How authentication works]
+## Design Decisions
 
-## 🗄️ Data Architecture
-**Database**: [Type: PostgreSQL / MongoDB / etc.]
-**Key Tables/Collections**:
-- `table_name`: [Purpose, key fields]
-- `another_table`: [Purpose]
-
-**Caching**: [If any - Redis, in-memory, etc.]
-
-## 🔐 Security & Authentication
-- **Auth Method**: [JWT / Session / OAuth / etc.]
-- **Secrets Management**: [How secrets are stored]
-- **Key Security Patterns**: [Important security considerations]
-
-## 📊 Monitoring & Observability
-- **Logging**: [Where logs go, format]
-- **Metrics**: [What's tracked]
-- **Tracing**: [If distributed tracing is used]
-
-## 🚨 Critical Constraints
-- [Important architectural constraints or limitations]
-- [Performance requirements]
-- [Scalability considerations]
-
-## 🔮 Future Considerations
-- [Planned architectural changes]
-- [Tech debt to address]
-- [Scalability plans]
+- **No JS framework** — pure `.astro` components, no React/Vue/Svelte
+- **No CMS** — avoids complexity for a simple profile site
+- **No build-time data fetching** — content is static text, no API at build time
+- **Single page** — all sections on `index.astro`, smooth scroll navigation

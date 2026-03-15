@@ -1,177 +1,49 @@
 # Tech Stack
 
-## 🛠️ Core Technologies
+## Core Technologies
 
 ### Language & Runtime
-- **Primary Language**: [e.g., Python 3.11, JavaScript/Node.js 20]
-- **Language Version**: [Specific version with reasoning]
-- **Runtime Environment**: [e.g., Node.js, Python venv, etc.]
+- **Primary Language**: TypeScript (strict mode)
+- **Runtime**: Node.js >=22.12.0
+- **Package Manager**: pnpm
 
 ### Framework
-- **Main Framework**: [e.g., React 18, FastAPI, Godot 4.x]
-- **Version**: [Specific version]
-- **Why Chosen**: [Brief justification]
+- **Main Framework**: Astro 6.0.4
+- **Output Mode**: `static` (zero server runtime)
+- **Why**: Sub-second loads, zero JS to browser by default, free Cloudflare Pages tier
 
-## 📦 Key Dependencies
+## Key Dependencies
 
-### Production Dependencies
-| Dependency | Version | Purpose | Why This One? |
-|------------|---------|---------|---------------|
-| [package-name] | [^1.2.3] | [What it does] | [Why chosen over alternatives] |
-| [package-name] | [^2.0.0] | [What it does] | [Reasoning] |
-
-### Development Dependencies
+### Production
 | Dependency | Version | Purpose |
 |------------|---------|---------|
-| [dev-tool] | [^1.0.0] | [Testing / Linting / Build / etc.] |
+| astro | 6.0.4 | Static site framework |
+| @astrojs/cloudflare | 13.1.1 | Cloudflare Pages adapter |
 
-## 🖥️ Development Environment
+### Development
+| Dependency | Version | Purpose |
+|------------|---------|---------|
+| wrangler | 4.73.0 | Cloudflare CLI (local preview + deploy) |
+| typescript | bundled | Type checking |
 
-### Required System
-- **OS**: [macOS / Linux / Windows / Cross-platform]
-- **Minimum Version**: [If specific]
-- **Shell**: [bash / zsh / etc.]
+## Development Commands
 
-### Required Tools
-- [Tool 1]: [Version] — [Purpose]
-- [Tool 2]: [Version] — [Purpose]
-
-### Setup Instructions
 ```bash
-# Quick setup commands
-[Commands to get started]
+pnpm dev        # Local dev server
+pnpm build      # Production build → dist/
+pnpm preview    # Preview built site via wrangler
 ```
 
-See `README.md` or `docs/setup.md` for full setup guide.
+## Design System
 
-## 🗄️ Data Storage
+- **Fonts**: Inter (body), JetBrains Mono (code/accent)
+- **Theme**: Dark, CSS custom properties
+- **Tokens defined in**: `src/styles/global.css`
+- **No CSS framework** — hand-rolled, minimal
 
-### Database
-- **Type**: [PostgreSQL / MongoDB / SQLite / etc.]
-- **Version**: [Specific version]
-- **ORM/Driver**: [If applicable]
+## Deploy
 
-### Caching
-- **System**: [Redis / in-memory / etc.]
-- **Purpose**: [What's cached and why]
-
-### File Storage
-- **Local**: [Where files are stored]
-- **Cloud**: [If using S3, GCS, etc.]
-
-## 🔧 Build & Deployment
-
-### Build System
-- **Build Tool**: [Webpack / Vite / Make / etc.]
-- **Package Manager**: [npm / yarn / pnpm / pip / etc.]
-- **Build Time**: [Typical build duration]
-
-### Deployment
-- **Platform**: [Heroku / Vercel / AWS / Self-hosted / etc.]
-- **CI/CD**: [GitHub Actions / GitLab CI / etc.]
-- **Deployment Process**: [Brief overview or link to docs]
-
-## 🧪 Testing
-
-### Test Framework
-- **Unit Tests**: [Jest / pytest / etc.]
-- **Integration Tests**: [Framework/approach]
-- **E2E Tests**: [Playwright / Cypress / etc.]
-
-### Coverage
-- **Current Coverage**: [%]
-- **Target Coverage**: [%]
-
-## 📝 Code Quality
-
-### Linting & Formatting
-- **Linter**: [ESLint / Ruff / etc.]
-- **Formatter**: [Prettier / Black / etc.]
-- **Config**: [Location of config files]
-
-### Pre-commit Hooks
-- **Tool**: [pre-commit / husky / etc.]
-- **Checks**: [What runs before commit]
-
-## 🔐 Security & Secrets
-
-### Secrets Management
-- **Method**: [.env files / Vault / etc.]
-- **Location**: [Where secrets are stored - NOT the actual secrets!]
-- **Required Secrets**: [List of secret names needed, NO values]
-
-### Security Tools
-- [Dependency scanning tool]
-- [Security linting tool]
-
-## 📊 Monitoring & Logging
-
-### Logging
-- **Library**: [Winston / logging / etc.]
-- **Format**: [JSON / plain text / etc.]
-- **Destinations**: [Console / File / Cloud service]
-
-### Error Tracking
-- **Service**: [Sentry / Rollbar / etc.]
-- **Alert Threshold**: [When to notify]
-
-### Performance Monitoring
-- **Tool**: [If any - New Relic / custom / etc.]
-
-## 🚀 Performance Considerations
-
-### Optimization Strategies
-- [Key optimization approach 1]
-- [Key optimization approach 2]
-
-### Known Bottlenecks
-- [Performance bottleneck 1 + mitigation]
-- [Performance bottleneck 2 + mitigation]
-
-## 🔄 Version Control
-
-### Git Strategy
-- **Branching Model**: [Git Flow / Trunk-based / etc.]
-- **Main Branch**: [main / master]
-- **Protected Branches**: [Which branches require review]
-
-### Commit Convention
-- **Format**: [Conventional Commits / Custom / etc.]
-- **Example**: `feat(auth): add password reset flow`
-
-## 📚 Documentation
-
-### Code Documentation
-- **Standard**: [JSDoc / Sphinx / etc.]
-- **Coverage**: [What's documented]
-
-### API Documentation
-- **Format**: [OpenAPI / Swagger / etc.]
-- **Location**: [Where to find API docs]
-
-## 🔧 Development Workflow
-
-### Local Development
-```bash
-# Start dev environment
-[command]
-
-# Run tests
-[command]
-
-# Build for production
-[command]
-```
-
-### Debugging
-- **Tools**: [Debugger tools used]
-- **Tips**: [Project-specific debugging tips]
-
-## ⚠️ Known Technical Debt
-- [Tech debt item 1] — Priority: [High/Medium/Low]
-- [Tech debt item 2] — Priority: [High/Medium/Low]
-
-## 🔮 Future Tech Considerations
-- [Planned migration or upgrade]
-- [Technology being evaluated]
-- [Technical improvements on roadmap]
+- **Platform**: Cloudflare Pages
+- **Trigger**: Push to `master` branch → auto-deploy
+- **Config**: `wrangler.jsonc` (project name, compatibility date)
+- **Build output**: `dist/`
