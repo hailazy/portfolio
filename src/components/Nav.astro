@@ -1,21 +1,21 @@
 ---
 const links = [
-  { label: 'Services', href: '#services' },
-  { label: 'Work',     href: '#work' },
-  { label: 'About',    href: '#about' },
-  { label: 'Contact',  href: '#contact' },
+  { label: 'Projects',  href: '#projects' },
+  { label: 'Services',  href: '#services' },
+  { label: 'About',     href: '#about' },
+  { label: 'Contact',   href: '#contact' },
 ];
 ---
 
 <nav>
   <div class="container nav-inner">
-    <a href="#hero" class="wordmark">hai.dev</a>
+    <a href="#hero" class="wordmark">haingt.dev</a>
     <ul class="nav-links">
       {links.map((l) => (
         <li><a href={l.href}>{l.label}</a></li>
       ))}
     </ul>
-    <a href="#contact" class="btn btn-primary btn-sm">Hire me</a>
+    <a href="#contact" class="btn btn-primary btn-sm">Get in touch</a>
   </div>
 </nav>
 

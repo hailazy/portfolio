@@ -3,37 +3,27 @@ interface Service {
   title: string;
   description: string;
   tags: string[];
-  price: string;
 }
 
 const services: Service[] = [
   {
-    title: 'AI Integration & Automation',
-    description:
-      'Connect your tools. Automate the repetitive parts. Build pipelines that run while you sleep — Claude API, OpenAI, n8n, custom webhook flows.',
-    tags: ['Claude API', 'OpenAI', 'n8n', 'Node.js'],
-    price: 'Upwork — $20/hr+',
-  },
-  {
-    title: 'Fast, Focused Websites',
-    description:
-      'Content-first sites built on Astro + Cloudflare Pages. Sub-second loads, zero runtime overhead, easy to maintain. This portfolio is built on the same stack.',
-    tags: ['Astro', 'Cloudflare Pages', 'TypeScript'],
-    price: 'From 5M VND / project',
-  },
-  {
     title: 'Backend Architecture & APIs',
     description:
-      "API design, database optimization, AWS infrastructure. I've handled systems at 15M+ record scale. I know where things break before they do.",
+      "API design, database optimization, AWS infrastructure. 7 years of production systems — I've handled 15M+ record datasets and cut processing times by 95%. I know where things break before they do.",
     tags: ['Node.js', 'AWS', 'MongoDB', 'Redis', 'PostgreSQL'],
-    price: 'Upwork — $20/hr+',
+  },
+  {
+    title: 'AI Integration & Automation',
+    description:
+      'Connect your tools. Automate the repetitive parts. Build pipelines that actually run — Claude API, OpenAI, n8n, custom flows. Not the hype, just the plumbing.',
+    tags: ['Claude API', 'OpenAI', 'n8n', 'Node.js', 'MCP'],
   },
 ];
 ---
 
 <section id="services">
   <div class="container">
-    <p class="section-label">What I do</p>
+    <p class="section-label">Available for hire</p>
     <h2>Services</h2>
     <div class="grid">
       {
@@ -46,11 +36,14 @@ const services: Service[] = [
                 <span class="tag">{t}</span>
               ))}
             </div>
-            <p class="price">{s.price}</p>
           </div>
         ))
       }
     </div>
+    <p class="availability-note">
+      Available for select projects on Upwork and direct contracts.
+      <a href="#contact" class="note-link">Get in touch →</a>
+    </p>
   </div>
 </section>
 
@@ -97,12 +90,14 @@ const services: Service[] = [
     margin-top: auto;
   }
 
-  .price {
-    font-family: var(--font-mono);
-    font-size: 0.82rem;
+  .availability-note {
+    margin-top: 2rem;
+    font-size: 0.9rem;
+    color: var(--color-muted);
+  }
+
+  .note-link {
     color: var(--color-accent);
-    border-top: 1px solid var(--color-border);
-    padding-top: 1rem;
-    margin-top: 0.25rem;
+    margin-left: 0.25rem;
   }
 </style>

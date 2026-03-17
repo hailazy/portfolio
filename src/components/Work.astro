@@ -1,5 +1,12 @@
 ---
-interface Project {
+interface CurrentProject {
+  title: string;
+  description: string;
+  tags: string[];
+  link?: string;
+}
+
+interface PastProject {
   tag: string;
   metric: string;
   title: string;
@@ -7,7 +14,31 @@ interface Project {
   stack: string[];
 }
 
-const projects: Project[] = [
+const currentProjects: CurrentProject[] = [
+  {
+    title: 'Wildtide',
+    description:
+      'An indirect auto-city builder where you govern through policies, not placement. WorldBox meets Frostpunk in a Terra Nil aesthetic. Hex terrain, faction AI, wave survival, economic simulation. Early prototype, active development.',
+    tags: ['Godot 4.6', 'GDScript', 'Game Dev'],
+    link: 'https://github.com/haingt-dev/Wildtide',
+  },
+  {
+    title: 'Bookie AI Video Pipeline',
+    description:
+      'Automated pipeline that turns books into narrated video content for Bookie, a Vietnamese reading community I co-founded 9+ years ago. Research, storyboard, script, TTS, AI visuals, Remotion assembly. One command, full production.',
+    tags: ['Remotion', 'Claude API', 'viXTTS', 'Gemini API'],
+    link: 'https://github.com/haingt-dev/Bookie',
+  },
+  {
+    title: 'Agent Hub',
+    description:
+      'Personal infrastructure for Claude Code — global skills, plugins, hooks, and project bootstrapping across a multi-project workspace. Turns Claude Code from per-project islands into a connected system.',
+    tags: ['Claude Code', 'Bash', 'MCP', 'Node.js'],
+    link: 'https://github.com/haingt-dev/agent',
+  },
+];
+
+const pastProjects: PastProject[] = [
   {
     tag: 'Performance Engineering',
     metric: '36 hrs → 2 hrs',
@@ -17,39 +48,49 @@ const projects: Project[] = [
     stack: ['PostgreSQL', 'Node.js', 'Query Optimization'],
   },
   {
-    tag: 'System Reliability',
-    metric: '3 hrs → 5 min',
-    title: 'Automated Incident Response',
-    description:
-      'On-call engineers were spending 3+ hours per incident manually correlating logs across services. Built an automated triage pipeline that detects anomalies, traces root cause across distributed logs, and fires a structured Slack alert. Mean time to resolution dropped by 97%.',
-    stack: ['Node.js', 'AWS CloudWatch', 'Slack API', 'n8n'],
-  },
-  {
-    tag: 'Full-Stack Architecture',
-    metric: '0 → production',
-    title: 'Transport Management System',
-    description:
-      'Greenfield TMS for a logistics client — designed the data model, built the REST API, and delivered the frontend. Handles order lifecycle, driver assignment, and real-time status updates. Deployed on AWS with MongoDB for flexible schema evolution.',
-    stack: ['Node.js', 'MongoDB', 'AWS', 'React'],
-  },
-  {
     tag: 'AI Integration',
     metric: 'Manual → automated',
     title: 'AI-Powered Content Pipeline',
     description:
-      'Content team was manually drafting, scheduling, and publishing across three platforms — 4–5 hours per week. Built an n8n pipeline that ingests raw notes, runs them through Claude API for drafting and formatting, then queues for review and auto-publishes. Team now spends 30 minutes reviewing instead of writing.',
+      'Content team was manually drafting, scheduling, and publishing across three platforms — 4-5 hours per week. Built an n8n pipeline that ingests raw notes, runs them through Claude API for drafting and formatting, then queues for review and auto-publishes. Team now spends 30 minutes reviewing instead of writing.',
     stack: ['n8n', 'Claude API', 'Node.js', 'Webhook'],
   },
 ];
 ---
 
-<section id="work">
+<section id="projects">
   <div class="container">
-    <p class="section-label">Selected projects</p>
-    <h2>Work</h2>
+    <p class="section-label">What I'm building</p>
+    <h2>Projects</h2>
     <div class="grid">
       {
-        projects.map((p) => (
+        currentProjects.map((p) => (
+          <div class="card">
+            <h3>
+              {p.link ? (
+                <a href={p.link} target="_blank" rel="noopener noreferrer" class="project-link">
+                  {p.title} <span class="arrow">↗</span>
+                </a>
+              ) : (
+                p.title
+              )}
+            </h3>
+            <p class="desc">{p.description}</p>
+            <div class="stack">
+              {p.tags.map((t) => (
+                <span class="tag">{t}</span>
+              ))}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+
+    <p class="section-label subsection">Track record</p>
+    <h3 class="subsection-heading">Past work</h3>
+    <div class="grid">
+      {
+        pastProjects.map((p) => (
           <div class="card">
             <span class="tag">{p.tag}</span>
             <p class="metric">{p.metric}</p>
@@ -95,6 +136,22 @@ const projects: Project[] = [
     gap: 0.75rem;
   }
 
+  .card h3 { color: var(--color-text); }
+
+  .project-link {
+    color: var(--color-text);
+    transition: color 0.15s;
+  }
+
+  .project-link:hover {
+    color: var(--color-accent);
+  }
+
+  .arrow {
+    font-size: 0.8em;
+    opacity: 0.5;
+  }
+
   .metric {
     font-size: clamp(1.6rem, 3.5vw, 2.2rem);
     font-weight: 700;
@@ -103,8 +160,6 @@ const projects: Project[] = [
     line-height: 1;
     max-width: none;
   }
-
-  .card h3 { color: var(--color-text); }
 
   .desc {
     color: var(--color-muted);
@@ -119,5 +174,15 @@ const projects: Project[] = [
     flex-wrap: wrap;
     gap: 0.4rem;
     margin-top: 0.25rem;
+  }
+
+  .subsection {
+    margin-top: 4rem;
+  }
+
+  .subsection-heading {
+    font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+    margin-bottom: 2rem;
+    color: var(--color-muted);
   }
 </style>
