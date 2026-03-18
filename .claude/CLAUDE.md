@@ -1,6 +1,7 @@
 # Claude Code — portfolio
 
 @~/.claude/brains/indie-ecosystem.md
+@~/.claude/brains/content-voice.md
 
 ## Project Values
 - **Minimal impact** — Make the smallest changes necessary. Don't over-engineer
