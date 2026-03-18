@@ -21,7 +21,7 @@
       </a>
     </div>
     <div class="links reveal">
-      <a href="mailto:thanhhai9x98@gmail.com" class="link">
+      <a href="mailto:thanhhai9x98@gmail.com" class="link" target="_blank" rel="noopener noreferrer" id="email-link" title="Send email (or copy to clipboard)">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
           <rect x="2" y="4" width="20" height="16" rx="2" />
           <path d="M22 7l-10 7L2 7" />
@@ -52,6 +52,15 @@
       </a>
     </div>
   </div>
+  <script>
+    const emailLink = document.getElementById('email-link');
+    if (emailLink) {
+      emailLink.addEventListener('click', (e) => {
+        // Automatically copy to clipboard as a fallback for OS without mail clients
+        navigator.clipboard.writeText('thanhhai9x98@gmail.com').catch(() => {});
+      });
+    }
+  </script>
 </section>
 
 <style>
