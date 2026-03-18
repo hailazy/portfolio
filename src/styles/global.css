@@ -4,8 +4,15 @@
   --color-surface: #16161a;
   --color-border:  #2a2a35;
   --color-text:    #e8e8ec;
-  --color-muted:   #8888a0;
-  --color-accent:  #7c6af7;
+  --color-muted:           #787890; /* Dimmed further for better keyword contrast */
+  --color-accent:  #3b82f6;
+
+  --color-accent-dim:      #2563eb;
+  --color-accent-glow:     rgba(59, 130, 246, 0.15);
+  --color-accent-gradient: linear-gradient(135deg, #2563eb 0%, #3b82f6 50%, #60a5fa 100%);
+  --color-surface-hover:   #1c1c22;
+  --shadow-glow:           0 0 24px rgba(59, 130, 246, 0.12);
+  --shadow-card:           0 4px 16px rgba(0, 0, 0, 0.4);
 
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
@@ -77,6 +84,12 @@ section {
   border: 1px solid var(--color-border);
   padding: 0.2em 0.6em;
   border-radius: 4px;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.tag:hover {
+  border-color: var(--color-accent);
+  color: var(--color-text);
 }
 
 /* ── Button ────────────────────────────────────────────── */
@@ -84,11 +97,11 @@ section {
   display: inline-flex;
   align-items: center;
   gap: 0.4em;
-  padding: 0.6em 1.3em;
+  padding: 0.75em 1.5em;
   border-radius: var(--radius);
   font-size: 0.95rem;
   font-weight: 600;
-  transition: opacity 0.15s, transform 0.15s;
+  transition: opacity 0.2s ease-out, transform 0.2s ease-out;
 }
 
 .btn:hover { opacity: 0.85; transform: translateY(-1px); }
@@ -108,12 +121,150 @@ section {
 /* ── Divider ───────────────────────────────────────────── */
 .section-divider {
   border: none;
-  border-top: 1px solid var(--color-border);
+  height: 1px;
   margin: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--color-accent-dim) 50%,
+    transparent 100%
+  );
+  opacity: 0.3;
+}
+
+/* ── Card Hover & Glow Tracking ────────────────────────── */
+.card {
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s ease-out, box-shadow 0.3s ease-out, transform 0.3s ease-out;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    800px circle at var(--mouse-x, 0) var(--mouse-y, 0),
+    rgba(59, 130, 246, 0.08),
+    transparent 40%
+  );
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.card:focus-within::before,
+.card:hover::before {
+  opacity: 1;
+}
+
+.card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.card:hover {
+  border-color: var(--color-accent-dim);
+  box-shadow: var(--shadow-glow), var(--shadow-card);
+  transform: translateY(-4px);
+}
+
+/* ── Terminal Mac OS Dots Motif ────────────────────────── */
+.mac-dots {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 1.25rem;
+}
+
+.mac-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  filter: brightness(0.7) saturate(0.6) opacity(0.8);
+  transition: filter 0.3s ease;
+}
+
+.card:hover .mac-dot,
+.card:focus-within .mac-dot {
+  filter: brightness(1) saturate(1) opacity(1);
+}
+
+.mac-dot:nth-child(1) { background-color: #ff5f56; }
+.mac-dot:nth-child(2) { background-color: #ffbd2e; }
+.mac-dot:nth-child(3) { background-color: #27c93f; }
+
+/* ── Scroll Reveal ─────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Scroll Progress Bar ───────────────────────────────── */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 0%;
+  background: var(--color-accent-gradient);
+  z-index: 200;
+  pointer-events: none;
+  box-shadow: 0 0 8px var(--color-accent);
+  transition: width 0.1s ease-out;
 }
 
 /* ── Focus visible ─────────────────────────────────────── */
 :focus-visible {
   outline: 2px solid var(--color-accent);
   outline-offset: 3px;
+}
+
+/* ── Reduced Motion ────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .card {
+    transition: none;
+  }
+
+  .card:hover {
+    transform: none;
+  }
+
+  .btn {
+    transition: none;
+  }
+
+  .btn:hover {
+    transform: none;
+  }
+
+  .tag {
+    transition: none;
+    color: var(--color-muted); /* enforce initial state if hover occurs */
+  }
+  
+  .tag:hover {
+    color: var(--color-text); /* let hover color change immediately */
+  }
+
+  .scroll-progress {
+    display: none;
+  }
 }

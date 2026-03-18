@@ -38,6 +38,75 @@ const {
   </head>
   <body>
     <slot />
+
+    <script>
+      // Scroll reveal (IntersectionObserver)
+      const revealEls = document.querySelectorAll('.reveal');
+      if (revealEls.length > 0) {
+        const revealObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                revealObserver.unobserve(entry.target);
+              }
+            });
+          },
+          { rootMargin: '0px 0px -10% 0px', threshold: 0 }
+        );
+        revealEls.forEach((el) => revealObserver.observe(el));
+      }
+
+      // Scroll progress bar
+      const progressBar = document.querySelector('.scroll-progress') as HTMLElement | null;
+      if (progressBar) {
+        window.addEventListener('scroll', () => {
+          const scrollTop = window.scrollY;
+          const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+          const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+          progressBar.style.width = `${progress}%`;
+        }, { passive: true });
+      }
+
+      // Nav active section indicator
+      const navLinks = document.querySelectorAll('.nav-links a') as NodeListOf<HTMLAnchorElement>;
+      const sections = document.querySelectorAll('section[id]');
+      if (navLinks.length > 0 && sections.length > 0) {
+        const navObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                const id = entry.target.getAttribute('id');
+                navLinks.forEach((link) => {
+                  link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
+                });
+              }
+            });
+          },
+          { rootMargin: '-30% 0px -60% 0px' }
+        );
+        sections.forEach((section) => navObserver.observe(section));
+      }
+
+    // --- Card Glow Tracking ---
+    const handleOnMouseMove = e => {
+      const target = e.currentTarget;
+      const rect = target.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      target.style.setProperty('--mouse-x', `${x}px`);
+      target.style.setProperty('--mouse-y', `${y}px`);
+    };
+
+    const initCards = () => {
+      for(const card of document.querySelectorAll('.card')) {
+        card.onmousemove = e => handleOnMouseMove(e);
+      }
+    };
+    
+    // Initialize glow tracking on load
+    initCards();
+  </script>
   </body>
 </html>
 

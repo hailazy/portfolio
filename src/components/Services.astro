@@ -3,6 +3,7 @@ interface Service {
   title: string;
   description: string;
   tags: string[];
+  icon: string;
 }
 
 const services: Service[] = [
@@ -11,24 +12,54 @@ const services: Service[] = [
     description:
       "API design, database optimization, AWS infrastructure. 7 years of production systems — I've handled 15M+ record datasets and cut processing times by 95%. I know where things break before they do.",
     tags: ['Node.js', 'AWS', 'MongoDB', 'Redis', 'PostgreSQL'],
+    icon: 'server',
   },
   {
     title: 'AI Integration & Automation',
     description:
       'Connect your tools. Automate the repetitive parts. Build pipelines that actually run — Claude API, OpenAI, n8n, custom flows. Not the hype, just the plumbing.',
     tags: ['Claude API', 'OpenAI', 'n8n', 'Node.js', 'MCP'],
+    icon: 'cpu',
   },
 ];
 ---
 
 <section id="services">
   <div class="container">
-    <p class="section-label">Available for hire</p>
-    <h2>Services</h2>
+    <p class="section-label reveal">Available for hire</p>
+    <h2 class="reveal">Services</h2>
     <div class="grid">
       {
-        services.map((s) => (
-          <div class="card">
+        services.map((s, index) => (
+          <div class="card reveal" style={`transition-delay: ${index * 100}ms`}>
+            <div class="mac-dots">
+              <span class="mac-dot"></span>
+              <span class="mac-dot"></span>
+              <span class="mac-dot"></span>
+            </div>
+            <div class="icon-container">
+              {s.icon === 'server' ? (
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="2" width="20" height="8" rx="2" ry="2" />
+                  <rect x="2" y="14" width="20" height="8" rx="2" ry="2" />
+                  <line x1="6" y1="6" x2="6.01" y2="6" />
+                  <line x1="6" y1="18" x2="6.01" y2="18" />
+                </svg>
+              ) : (
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="5" y="5" width="14" height="14" rx="2" ry="2" />
+                  <rect x="9" y="9" width="6" height="6" />
+                  <line x1="9" y1="2" x2="9" y2="5" />
+                  <line x1="15" y1="2" x2="15" y2="5" />
+                  <line x1="9" y1="19" x2="9" y2="22" />
+                  <line x1="15" y1="19" x2="15" y2="22" />
+                  <line x1="2" y1="9" x2="5" y2="9" />
+                  <line x1="2" y1="15" x2="5" y2="15" />
+                  <line x1="19" y1="9" x2="22" y2="9" />
+                  <line x1="19" y1="15" x2="22" y2="15" />
+                </svg>
+              )}
+            </div>
             <h3>{s.title}</h3>
             <p>{s.description}</p>
             <div class="tags">
@@ -40,7 +71,7 @@ const services: Service[] = [
         ))
       }
     </div>
-    <p class="availability-note">
+    <p class="availability-note reveal">
       Available for select projects on Upwork and direct contracts.
       <a href="#contact" class="note-link">Get in touch →</a>
     </p>
@@ -61,8 +92,14 @@ const services: Service[] = [
 
   .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+    grid-template-columns: 1fr;
     gap: 1.25rem;
+  }
+
+  @media (min-width: 768px) {
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 
   .card {
@@ -72,15 +109,32 @@ const services: Service[] = [
     padding: 1.75rem;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
   }
 
-  .card h3 { color: var(--color-text); }
+  .icon-container {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-accent-glow);
+    border-radius: 12px;
+    color: var(--color-accent);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    box-shadow: inset 0 0 12px rgba(59, 130, 246, 0.1);
+    margin-bottom: 0.5rem;
+  }
+
+  .card h3 { 
+    color: var(--color-text);
+    margin-bottom: 0.25rem;
+  }
 
   .card p {
     color: var(--color-muted);
     font-size: 0.95rem;
     max-width: none;
+    margin-bottom: 1.5rem;
   }
 
   .tags {

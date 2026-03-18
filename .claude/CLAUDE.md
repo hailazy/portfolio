@@ -1,5 +1,7 @@
 # Claude Code — portfolio
 
+@~/.claude/brains/indie-ecosystem.md
+
 ## Project Values
 - **Minimal impact** — Make the smallest changes necessary. Don't over-engineer
 - **No dirty state** — Don't leave the environment broken. Verify changes work before completing a task
